@@ -10,6 +10,7 @@ public class App {
         System.out.print("작가 : ");
 
         System.out.println("1번 명언이 등록되었습니다.");
+        System.out.println("2번 명언이 등록되었습니다.");
 
         System.out.println("프로그램이 종료되었습니다.");
     }
