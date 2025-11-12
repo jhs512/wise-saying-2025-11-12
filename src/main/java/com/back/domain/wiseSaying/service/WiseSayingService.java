@@ -17,15 +17,16 @@ public class WiseSayingService {
         return wiseSaying;
     }
 
-    public List<WiseSaying> findForList(String keywordType, String keyword) {
+    public List<WiseSaying> findForList(String keywordType, String keyword, int pageSize, int pageNo) {
         if (keyword.isBlank()) {
-            return wiseSayingRepository.findAll();
+            return wiseSayingRepository.findAll(pageSize, pageNo);
         }
 
         return switch (keywordType) {
-            case "content" -> wiseSayingRepository.findByContentContaining(keyword);
-            case "author" -> wiseSayingRepository.findByAuthorContaining(keyword);
-            default -> wiseSayingRepository.findByContentContainingOrAuthorContaining(keyword, keyword);
+            case "content" -> wiseSayingRepository.findByContentContaining(keyword, pageSize, pageNo);
+            case "author" -> wiseSayingRepository.findByAuthorContaining(keyword, pageSize, pageNo);
+            default ->
+                    wiseSayingRepository.findByContentContainingOrAuthorContaining(keyword, keyword, pageSize, pageNo);
         };
     }
 

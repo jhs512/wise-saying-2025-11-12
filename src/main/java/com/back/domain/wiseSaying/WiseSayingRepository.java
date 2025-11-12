@@ -17,12 +17,12 @@ public class WiseSayingRepository {
         }
     }
 
-    public List<WiseSaying> findAll() {
+    public List<WiseSaying> findAll(int pageSize, int pageNo) {
         return
                 wiseSayings
                         .reversed()
                         .stream()
-                        .limit(5)
+                        .limit(pageSize)
                         .toList();
     }
 
@@ -51,30 +51,30 @@ public class WiseSayingRepository {
                 .orElse(null);
     }
 
-    public List<WiseSaying> findByContentContaining(String keyword) {
+    public List<WiseSaying> findByContentContaining(String keyword, int pageSize, int pageNo) {
         return wiseSayings
                 .reversed()
                 .stream()
                 .filter(w -> w.getContent().contains(keyword))
-                .limit(5)
+                .limit(pageSize)
                 .toList();
     }
 
-    public List<WiseSaying> findByAuthorContaining(String keyword) {
+    public List<WiseSaying> findByAuthorContaining(String keyword, int pageSize, int pageNo) {
         return wiseSayings
                 .reversed()
                 .stream()
                 .filter(w -> w.getAuthor().contains(keyword))
-                .limit(5)
+                .limit(pageSize)
                 .toList();
     }
 
-    public List<WiseSaying> findByContentContainingOrAuthorContaining(String keyword, String keyword1) {
+    public List<WiseSaying> findByContentContainingOrAuthorContaining(String keyword, String _keyword, int pageSize, int pageNo) {
         return wiseSayings
                 .reversed()
                 .stream()
                 .filter(w -> w.getContent().contains(keyword) || w.getAuthor().contains(keyword))
-                .limit(5)
+                .limit(pageSize)
                 .toList();
     }
 }
