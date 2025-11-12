@@ -18,7 +18,12 @@ public class WiseSayingRepository {
     }
 
     public List<WiseSaying> findAll() {
-        return wiseSayings.reversed();
+        return
+                wiseSayings
+                        .reversed()
+                        .stream()
+                        .limit(5)
+                        .toList();
     }
 
     public boolean deleteById(int id) {
@@ -51,6 +56,7 @@ public class WiseSayingRepository {
                 .reversed()
                 .stream()
                 .filter(w -> w.getContent().contains(keyword))
+                .limit(5)
                 .toList();
     }
 
@@ -59,6 +65,7 @@ public class WiseSayingRepository {
                 .reversed()
                 .stream()
                 .filter(w -> w.getAuthor().contains(keyword))
+                .limit(5)
                 .toList();
     }
 
@@ -67,6 +74,7 @@ public class WiseSayingRepository {
                 .reversed()
                 .stream()
                 .filter(w -> w.getContent().contains(keyword) || w.getAuthor().contains(keyword))
+                .limit(5)
                 .toList();
     }
 }
