@@ -17,8 +17,16 @@ public class WiseSayingService {
         return wiseSaying;
     }
 
-    public List<WiseSaying> findAll() {
-        return wiseSayingRepository.findAll();
+    public List<WiseSaying> findForList(String keywordType, String keyword) {
+        if (keyword.isBlank()) {
+            return wiseSayingRepository.findAll();
+        }
+
+        return switch (keywordType) {
+            case "content" -> wiseSayingRepository.findByContentContaining(keyword);
+            case "author" -> wiseSayingRepository.findByAuthorContaining(keyword);
+            default -> wiseSayingRepository.findByContentContainingOrAuthorContaining(keyword, keyword);
+        };
     }
 
     public boolean delete(int id) {

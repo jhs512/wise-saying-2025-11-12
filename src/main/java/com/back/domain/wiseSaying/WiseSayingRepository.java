@@ -45,4 +45,28 @@ public class WiseSayingRepository {
                 .findFirst()
                 .orElse(null);
     }
+
+    public List<WiseSaying> findByContentContaining(String keyword) {
+        return wiseSayings
+                .reversed()
+                .stream()
+                .filter(w -> w.getContent().contains(keyword))
+                .toList();
+    }
+
+    public List<WiseSaying> findByAuthorContaining(String keyword) {
+        return wiseSayings
+                .reversed()
+                .stream()
+                .filter(w -> w.getAuthor().contains(keyword))
+                .toList();
+    }
+
+    public List<WiseSaying> findByContentContainingOrAuthorContaining(String keyword, String keyword1) {
+        return wiseSayings
+                .reversed()
+                .stream()
+                .filter(w -> w.getContent().contains(keyword) || w.getAuthor().contains(keyword))
+                .toList();
+    }
 }

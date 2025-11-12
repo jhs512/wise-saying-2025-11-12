@@ -23,11 +23,14 @@ public class WiseSayingController {
         System.out.printf("%d번 명언이 등록되었습니다.\n", wiseSaying.getId());
     }
 
-    public void actionList() {
+    public void actionList(Rq rq) {
+        String keywordType = rq.getParam("keywordType", "all");
+        String keyword = rq.getParam("keyword", "");
+
         System.out.println("번호 / 작가 / 명언");
         System.out.println("----------------------");
 
-        for (WiseSaying wiseSaying : wiseSayingService.findAll()) {
+        for (WiseSaying wiseSaying : wiseSayingService.findForList(keywordType, keyword)) {
             System.out.printf("%d / %s / %s\n", wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getContent());
         }
     }
