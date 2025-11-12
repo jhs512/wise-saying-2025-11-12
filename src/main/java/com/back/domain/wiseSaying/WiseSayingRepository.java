@@ -37,4 +37,12 @@ public class WiseSayingRepository {
                 .findFirst()
                 .orElse(-1);
     }
+
+    public WiseSaying findById(int id) {
+        return wiseSayings
+                .stream()
+                .filter(w -> w.getId() == id)
+                .findFirst()
+                .orElse(null);
+    }
 }
