@@ -3,6 +3,7 @@ package com.back.domain.wiseSaying.controller;
 import com.back.AppContext;
 import com.back.WiseSaying;
 import com.back.domain.wiseSaying.service.WiseSayingService;
+import com.back.global.rq.Rq;
 
 import java.util.Scanner;
 
@@ -29,5 +30,23 @@ public class WiseSayingController {
         for (WiseSaying wiseSaying : wiseSayingService.findAll()) {
             System.out.printf("%d / %s / %s\n", wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getContent());
         }
+    }
+
+    public void actionDelete(Rq rq) {
+        int id = rq.getParamAsInt("id", -1);
+
+        if (id == -1) {
+            System.out.println("id를 숫자로 입력해주세요.");
+            return;
+        }
+
+        boolean deleted = wiseSayingService.delete(id);
+
+        if (!deleted) {
+            System.out.printf("%d번 명언은 존재하지 않습니다.\n", id);
+            return;
+        }
+
+        System.out.printf("%d번 명언이 삭제되었습니다.\n", id);
     }
 }

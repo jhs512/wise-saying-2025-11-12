@@ -20,4 +20,8 @@ public class WiseSayingService {
     public List<WiseSaying> findAll() {
         return wiseSayingRepository.findAll();
     }
+
+    public boolean delete(int id) {
+        return wiseSayingRepository.deleteById(id);
+    }
 }
