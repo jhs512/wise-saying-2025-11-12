@@ -22,6 +22,7 @@ public class WiseSayingRepository {
                 wiseSayings
                         .reversed()
                         .stream()
+                        .skip((long) (pageNo - 1) * pageSize)
                         .limit(pageSize)
                         .toList();
     }
@@ -56,6 +57,7 @@ public class WiseSayingRepository {
                 .reversed()
                 .stream()
                 .filter(w -> w.getContent().contains(keyword))
+                .skip((long) (pageNo - 1) * pageSize)
                 .limit(pageSize)
                 .toList();
     }
@@ -65,6 +67,7 @@ public class WiseSayingRepository {
                 .reversed()
                 .stream()
                 .filter(w -> w.getAuthor().contains(keyword))
+                .skip((long) (pageNo - 1) * pageSize)
                 .limit(pageSize)
                 .toList();
     }
@@ -74,6 +77,7 @@ public class WiseSayingRepository {
                 .reversed()
                 .stream()
                 .filter(w -> w.getContent().contains(keyword) || w.getAuthor().contains(keyword))
+                .skip((long) (pageNo - 1) * pageSize)
                 .limit(pageSize)
                 .toList();
     }
